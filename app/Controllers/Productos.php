@@ -19,10 +19,25 @@ class Productos extends BaseController {
 
         //$query = $db->query("SELECT nombre, stock, codigo, precio FROM productos");
         //consulta a la db usando query builder class
-        $query = $db->table('productos')
+        $condicion = ['stock < ' =>15, 'precio > ' =>50];
+        /* $query = $db->table('productos')
         ->select('id_producto, codigo, stock, precio, nombre')
-        //->where('id_producto', $id)
-        ->get();
+        ->where($condicion)
+        ->orderBy('nombre', 'desc')
+        ->limit(3)
+        ->get(); */
+
+
+        $sql = $db->table('productos');
+        $sql->select('
+            productos.codigo, 
+            productos.nombre,
+            productos.stock,
+            productos.precio,
+            almacenes.id_almacen
+        ');
+        $sql->join('almacenes', 'productos.id_almacen = almacenes.id_almacen');
+        $query = $sql->get();
         $resultado = $query->getResultArray(); 
         echo $db-> getLastQuery();
 
@@ -59,12 +74,13 @@ class Productos extends BaseController {
 
     public function transaccion () {
         $data = [
-            'codigo' => 11,
-            'nombre' => 'once producto',
-            'stock' => 10,
-            'precio' => 72
+            'codigo' => 6,
+            'nombre' => 'producto 6',
+            'stock' => 20,
+            'precio' => 150
         ];
-        //echo $this->productoModel->insert($data, false);
+        
+        echo $this->productoModel->insert($data);
         //echo $this->productoModel->update(2, $data);
         //echo $this->productoModel->delete(2);
         //echo $this->productoModel->withDeleted()->findAll() trae todos los registros incluyendo los eliminados
