@@ -7,6 +7,7 @@ class Productos extends BaseController {
 
     public function __construct () {
         $this->productoModel = new ProductosModel();
+        
     }
 
     public function index() {
@@ -15,6 +16,7 @@ class Productos extends BaseController {
         /* return view ('plantillas/header', $data)
         .view('productos/show', $data)
         .view('plantillas/footer', ['copy' => '2023']); */
+        helper("form");
          $db = \Config\Database::connect();
 
         //$query = $db->query("SELECT nombre, stock, codigo, precio FROM productos");

@@ -8,7 +8,7 @@ class Home extends BaseController
     {
         //return view('welcome_message');
         //echo "hola codeigniter 4";
-        $migrate = \Config\Services::Migrations();
+        /* $migrate = \Config\Services::Migrations();
         try {
             //$migrate->latest();// esto ejecuta todas las migraciones de forma ordenada
             $migrate->regress(-1); //esta funcion recibe el numero del batch y regresa la migracion
@@ -17,6 +17,10 @@ class Home extends BaseController
             //-1 para solo revertir el ultimo
         } catch (Throwable $exception) {
             echo($exception);
-        }
+        } */
+       /* $seeder = \Config\Database::seeder();
+       $seeder->call('CategoriasSeeder'); */
+       helper('util_helper');
+       echo(generaToken());
     }
 }

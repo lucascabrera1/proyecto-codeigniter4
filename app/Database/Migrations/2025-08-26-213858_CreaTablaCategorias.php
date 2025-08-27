@@ -13,7 +13,8 @@ class CreaTablaCategorias extends Migration
             'id' => [
                 'type' => 'int',
                 'constraint' => 11,
-                'autoincrement' => true
+                'unsigned' => true,
+                'auto_increment' => true
             ],
             'nombre' => [
                 'type' => 'varchar',
