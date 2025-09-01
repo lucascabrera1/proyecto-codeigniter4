@@ -18,7 +18,12 @@ $routes->set404Override();
 $routes->setAutoRoute(true);
 
 $routes->get('/', 'Home::index');
-$routes->get('productos', 'Productos::index');
+$routes->get('/productos', 'Productos::index');
+$routes->get('/productos/nuevo', 'Productos::nuevo');
+$routes->post('/productos/guarda', 'Productos::guarda');
+$routes->get('/productos/(:num)/editar', 'Productos::editar/$1');
+$routes->post('/productos/actualizar/(:num)', 'Productos::actualizar');
+
 $routes->get('productos/(:num)', 'Productos::show/$1');
 $routes->get('/productosshow/([0-9]{2})', 'Productos::othershow/$1');
 $routes->get('/productos/(:alpha)/(:num)', 'Productos::cat/$1/$2');

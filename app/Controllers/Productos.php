@@ -5,6 +5,8 @@ use App\Models\ProductosModel;
 
 class Productos extends BaseController {
 
+    protected $helpers = ['form'];
+
     public function __construct () {
         $this->productoModel = new ProductosModel();
         
@@ -16,7 +18,7 @@ class Productos extends BaseController {
         /* return view ('plantillas/header', $data)
         .view('productos/show', $data)
         .view('plantillas/footer', ['copy' => '2023']); */
-        helper("form");
+        //helper("form");
          $db = \Config\Database::connect();
 
         //$query = $db->query("SELECT nombre, stock, codigo, precio FROM productos");
@@ -74,6 +76,34 @@ class Productos extends BaseController {
         .view('plantillas/footer', ['copy' => '2023']); */
     }
 
+    public function nuevo() {
+        helper("form");
+        return view('productos/nuevo');
+    }
+
+    public function guarda() {
+        print_r("llega a guarda");
+        print_r($_POST);
+        $reglas = [
+            'codigo' => [
+                'label' => 'código',
+                'rules' => 'required | is_unique[productos.codigo]',
+                'errors' => [
+                    'required' => 'el campo {field} es obligatorio',
+                    'is_unique' => 'el campo {field} debe ser único',
+                ],
+            ],
+            'nombre' => 'required',
+            'precio' => 'required|greather_than[0]',
+            'stock' => 'numeric',
+            'almacen' => 'required|is_not_unique[almacen.id_almacen]'
+        ];
+        if(!$this->validate($reglas)) {
+            return redirect()->back()->withInput();
+        }
+        echo("todo bien");
+    }
+
     public function transaccion () {
         $data = [
             'codigo' => 6,
@@ -89,6 +119,36 @@ class Productos extends BaseController {
         //echo $this->productoModel->onlyDeleted()->findAll() trae todos los registros eliminados
         //echo $this->productoModel->purgeDeleted(); elimina definitivamente los registros
         //echo $this->productoModel->getInsertID();
+    }
+
+    public function editar($id) {
+        $productomodel = new ProductosModel();
+        $producto = $productomodel->find($id);
+        $data = ['titulo' => 'edita producto', 'producto' => $producto];
+        return view('productos/editar', $data);
+    }
+
+    public function actualizar($id) {
+        $reglas = [
+            'codigo' => [
+                'label' => 'código',
+                'rules' => 'required | is_unique[productos.codigo, id, {id_producto}]',
+                'errors' => [
+                    'required' => 'el campo {field} es obligatorio',
+                    'is_unique' => 'el campo {field} debe ser único',
+                ],
+            ],
+            'nombre' => 'required',
+            'precio' => 'required|greather_than[0]',
+            'stock' => [
+                'rules' => 'numeric|es_par',
+                'errors' => [
+                    'required' => 'el campo {field} es obligatorio',
+                    'es_par' => 'el campo {field} debe ser par',
+                ]
+            ],
+            'almacen' => 'required|is_not_unique[almacen.id_almacen]'
+        ];
     }
 
     public function othershow($id) {
