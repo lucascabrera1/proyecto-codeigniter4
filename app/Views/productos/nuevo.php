@@ -1,4 +1,4 @@
-<form action="<?php echo base_url('productos/guarda'); ?>" method="post" autocomplete="off">
+<form action="<?php echo base_url('/productos/guarda'); ?>" method="post" autocomplete="off">
     <h1>Nuevo Producto</h1>
     <p>
         <label for="codigo">Código</label>
@@ -16,6 +16,7 @@
         <label for="stock">Stock</label>
         <input type="number" name="stock" id="stock" min="0" value="0" class="form-control">
     </p>
+    <p>
         <button type="submit" class="btn btn-primary">Guardar</button>
     </p>
 </form>

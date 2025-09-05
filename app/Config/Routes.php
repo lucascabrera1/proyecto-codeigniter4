@@ -34,3 +34,18 @@ $routes->view('productosList/(:alpha)', 'lista_productos');
 $routes->group('admin', static function($routes){
     $routes->get('/productos', 'Admin\Productos::index');
 });
+
+//rutas almacen
+
+// $routes->resource('almacen')
+$routes->get('/almacen/new', 'Almacen::new');
+$routes->post('/almacen', 'Almacen::create');
+$routes->get('/almacen', 'Almacen::index');
+$routes->get('/almacen/(:num)', 'Almacen::show/$1');
+$routes->get('/almacen/(:num)/edit', 'Almacen::edit/$1');
+$routes->put('/almacen/(:num)', 'Almacen::update/$1');
+$routes->delete('/almacen/(:num)', 'Almacen::delete/$1');
+
+//rutas galeria
+$routes->get('/upload', 'Galeria::index');
+$routes->post('/upload', 'Galeria::subir');

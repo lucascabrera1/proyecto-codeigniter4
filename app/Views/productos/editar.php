@@ -1,4 +1,5 @@
 <form action="<?php echo base_url('productos/editar'); ?>" method="post" autocomplete="off">
+    <input type="hidden" name="_method" value="put">
     <h1>Editar Producto</h1>
     <input type="hidden" name="id_producto" value = "<?php echo $producto['id_producto'] ?>">
     <p>
