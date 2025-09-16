@@ -24,11 +24,11 @@
             <td><?= $empleado['nombre']?></td>
             <td><?= $empleado['telefono']?></td>
             <td><?= $empleado['email']?></td>
-            <td><?= $empleado['id_departamento']?></td>
+            <td><?= $empleado['departamento']?></td>
             <td>
                 <a href="<?= base_url('empleados/'.$empleado['id'].'/edit') ?>" class="btn btn-warning btn-sm me-2">Editar</a>
                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#eliminaModal" data-bs-url="<?= base_url('empleados/'.$empleado['id'].'/edit') ?>">Eliminar</button>
+                    data-bs-target="#eliminaModal" data-bs-url="<?= base_url('empleados/'.$empleado['id']); ?>">Eliminar</button>
                 <?= $empleado['id']?>
             </td>
         </tr>
@@ -62,7 +62,7 @@
             </div>
             <div class="modal-footer">
                 <form id="form-elimina" action="" method="post">
-                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_method" value="DELETE">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>

@@ -17,7 +17,7 @@ class Empleados extends BaseController
     public function index()
     {
         $empleadosModel = new EmpleadosModel();
-        $data['empleados'] = $empleadosModel->findAll();
+        $data['empleados'] = $empleadosModel->empleadosDepartamento();
         return view ("empleados/index", $data);
     }
 

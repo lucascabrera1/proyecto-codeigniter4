@@ -20,6 +20,12 @@ class EmpleadosModel extends Model
     protected array $casts = [];
     protected array $castHandlers = [];
 
+    public function empleadosDepartamento () {
+        return $this->select('empleados.*, departamentos.nombre AS departamento')
+        ->join('departamentos', 'empleados.id_departamento = departamentos.id')
+        ->findAll();
+    }
+
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
