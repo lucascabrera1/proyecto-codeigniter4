@@ -2,6 +2,8 @@
 
 <?= $this->section("contenido"); ?>
 
+
+
 <h3 class="my-3">Nuevo empleado</h3>
 
 <?php if(session()->getFlashdata('error') !== null ) { ?>

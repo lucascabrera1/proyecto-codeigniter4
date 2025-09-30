@@ -2,7 +2,15 @@
 
 <?= $this->section("contenido"); ?>
 
+<?php
+    $session = session();
+?>
+
 <h3 class="my-3" id="titulo">Empleados</h3>
+
+<?=
+    $session->getFlashdata('mensaje');
+?>
 
 <a href="<?= base_url("/empleados/new") ?>" class="btn btn-success">Agregar</a>
 

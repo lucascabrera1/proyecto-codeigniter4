@@ -16,6 +16,17 @@ class Empleados extends BaseController
      */
     public function index()
     {
+
+        /*$this->session->set('usuario_id', 'admin');
+        $data = [
+            "username" => "lucas",
+            "email" => "lucas_cabrera1@hotmail.com",
+            "logged_in" => true
+        ];
+        $this->session->set($data);
+        print_r($this->session->username);
+        exit;*/
+        $this->session->destroy();
         $empleadosModel = new EmpleadosModel();
         $data['empleados'] = $empleadosModel->empleadosDepartamento();
         return view ("empleados/index", $data);
@@ -40,6 +51,7 @@ class Empleados extends BaseController
      */
     public function new()
     {
+        $this->session->remove("username");
         $departamentosModel = new DepartamentosModel();
         $data['departamentos'] = $departamentosModel->findAll();
         return view ("/empleados/nuevo", $data);
@@ -76,6 +88,8 @@ class Empleados extends BaseController
             'email' => trim($post['email']),
             'id_departamento' => trim($post['departamento'])
         ]);
+
+        $this->session->setFlashData('mensaje', 'Registro agregado');
 
         return redirect()->to('empleados');
     }
